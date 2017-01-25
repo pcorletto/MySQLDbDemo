@@ -7,11 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private Button userReg, userLogin;
+    private EditText ET_NAME, ET_PASS;
+    private String login_name, login_pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,8 @@ public class MainActivity extends ActionBarActivity {
 
         userReg = (Button) findViewById(R.id.userReg);
         userLogin = (Button) findViewById(R.id.userLogin);
+        ET_NAME = (EditText) findViewById(R.id.user_name);
+        ET_PASS = (EditText) findViewById(R.id.user_pass);
 
         userReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,15 +36,15 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        userLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    }
 
-
-            }
-        });
-
-
+    public void userLogin(View view)
+    {
+        login_name = ET_NAME.getText().toString();
+        login_pass = ET_PASS.getText().toString();
+        String method = "login";
+        BackgroundTask backgroundTask = new BackgroundTask(this);
+        backgroundTask.execute(method,login_name,login_pass);
     }
 
 
